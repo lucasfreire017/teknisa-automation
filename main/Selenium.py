@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.expected_conditions import presence_of_element_located
 from selenium.webdriver.support.wait import WebDriverWait
 
-driver = webdriver.Chrome(executable_path=r"C:\Users\lucas\Documents\Teknisa\webdriver\chromedriver.exe")
+driver = webdriver.Chrome(executable_path=r"../webdriver/chromedriver.exe") # version 91
 driver.get("https://retail.teknisa.com/login/#/login#authentication")
 sleep(5)
 driver.find_element_by_name("USER").send_keys("estoque.cj@pobrejuan.com.br" + Keys.TAB)
@@ -33,7 +33,7 @@ def wait(*class_name):
     sleep(5)
     #show if the element was previewed
     if element.is_displayed() == False:
-        Keys.F5
+        print(f'Elemento visivel: {element.is_displayed()}')
 
 # function responsible to write the start and final date of notes that will be searched in this form:
 # (01/07/2021 - 31/07/2021) -> (0107202131072021)
@@ -54,9 +54,10 @@ def showdate():
 if usuario() == True:
     driver.find_element_by_xpath('/html/body/span/section/section/div[2]/aside[1]/aside/section/footer/button[1]').click()
 
-sleep(15)
+
+wait('bars')
 driver.find_element_by_xpath('//*[@id="header"]/div/div[2]/div[1]/a/div').click()
-sleep(2)
+sleep(3)
 driver.find_element_by_xpath('/html/body/span/section/section/div[2]/section[1]/div/aside/div[1]/section/input').send_keys('Importação/Consulta de Notas Fiscais (Arquivo XML)')
 driver.find_element_by_xpath('/html/body/span/section/section/div[2]/section[1]/div/aside/div[2]/nav/ul/li/span/span[2]').click()
 
