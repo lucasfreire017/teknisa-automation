@@ -59,7 +59,7 @@ driver.find_element_by_xpath(
 
 while True:
     if wait('popup-title', 'poput') == False:
-        driver.find_element_by_class_name('popup-title').send_keys(Keys.F5)
+        driver.find_element_by_tag_name('body').send_keys(Keys.F5)
     else:
         break
 
@@ -77,7 +77,7 @@ driver.find_element_by_xpath('//*[@id="DTEMISSAO_START"]').send_keys(Keys.HOME, 
 sleep(2)
 driver.find_element_by_xpath('//*[@id="footer"]/div[3]/ul/li/a/span').click()  # Click when the filter is completed
 
-sleep(5)
-driver.find_element_by_xpath('/html/body/span/section/section/div[2]/section[2]/div/section/section/div/section/div/div[2]/div/div[3]/span[2]/svg').click()
-driver.find_element_by_xpath('/html/body/span/section/section/div[2]/section[2]/div/section/section/div/section/div/div[2]/div/div[1]/ul/li[3]/div/div/span[1]/svg').click()
-driver.find_element_by_xpath('mousetrap zh-input-search-floating ng-pristine ng-valid ng-touched"').send_keys('123456' + Keys.RETURN)
+wait('control-handle', 'botão de ações')
+driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL, 'f')
+sleep(1)
+driver.find_element_by_xpath('/html/body/span/section/section/div[2]/section[2]/div/section/section/div/section/div/div[2]/div/div[1]/ul/li[3]/div/div/div/div[3]/input').send_keys('12345')
