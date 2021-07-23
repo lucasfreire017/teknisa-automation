@@ -137,8 +137,8 @@ driver.find_element_by_xpath(
 
 while True:
     try:
-        waitx('//*[@id="grid-4037041933179304567641"]/div[2]/div/div/div/ng-include/p', '\033[1;31m"Notas não encontradas"\033[m',
-              time=10)
+        waitx('//*[@id="grid-4037041933179304567641"]/div[2]/div/div/div/ng-include/p',
+              '\033[1;31m"Notas não encontradas"\033[m', time=10)
     except:
         break
     else:
@@ -146,7 +146,8 @@ while True:
         driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL, 'f')
         sleep(1)
         driver.find_element_by_xpath(
-            '/html/body/span/section/section/div[2]/section[2]/div/section/section/div/section/div/div[2]/div/div[1]/ul/li['
+            '/html/body/span/section/section/div[2]/section[2]/div/section/section/div/section/div/div[2]/div/div['
+            '1]/ul/li[ '
             '3]/div/div/div/div[3]/input').send_keys(initialNotes())
 
 driver.find_element_by_xpath('//*[@id="grid-4037041933179304567641"]/div[2]/div/div[1]').click()
