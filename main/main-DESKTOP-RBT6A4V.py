@@ -93,15 +93,16 @@ if wait('zh-container-text-alert', 'alerta'):
     driver.find_element_by_xpath(
         '/html/body/span/section/section/div[2]/aside[1]/aside/section/footer/button[1]').click()
 
-wait('bars', 'menu')
-sleep(5)
+wait('menu-items', 'menu')
+
 driver.find_element_by_xpath('//*[@id="header"]/div/div[2]/div[1]/a/div').click()  # click to open container
 sleep(5)
 driver.find_element_by_xpath(
     '/html/body/span/section/section/div[2]/section[1]/div/aside/div[1]/section/input').send_keys(
     'Importação/Consulta de Notas Fiscais (Arquivo XML)')  # first option searched
+sleep(3)
 driver.find_element_by_xpath(
-    '/html/body/span/section/section/div[2]/section[1]/div/aside/div[2]/nav/ul/li/span/span[2]').click()
+    '/html/body/span/section/section/div[2]/section[1]/div/aside/div[2]/nav/ul/li/span/span[3]').click()
 
 while True:
     try:
@@ -112,10 +113,10 @@ while True:
         break
 
 wait('current', 'Opção Unidade')
-sleep(5)
+sleep(3)
 driver.find_element_by_class_name('current').click()
 wait('option', 'Inscrição Estadual Destino')
-sleep(5)
+sleep(3)
 driver.find_element_by_class_name('option').click()
 sleep(3)
 driver.find_element_by_xpath(
@@ -160,10 +161,27 @@ print(type('key'))
 key = x.strip('Chave de Acesso').split()[0]
 print(f'A chave de Acesso é: {key}')
 
-# Lançamento de entrada
+# <--- Lançamento de entrada --->
 
 # Open a new tab
 driver.execute_script("window.open('https://retail.teknisa.com/df/#/df_entrada#dfe11000_lancamento_entrada', '_blank')")
+launchTab = driver.window_handles[1]
+xmlTab = driver.window_handles[0]
 
 # Change tab
-driver.switch_to.window(1)
+driver.switch_to.window(launchTab)
+
+while True:
+    try:
+        wait('container', 'filtros', 15)
+    except:
+        driver.refresh()
+    else:
+        break
+
+driver.find_element_by_xpath('//*[@id="footer"]/div[3]/ul/li/a/span').click()
+waitx('zh-footer-center','bory content')
+driver.find_element_by_xpath('//*[@id="footer"]/div[2]/ul/li/a/div').click()
+wait('container zh-tabbed-container','Container DANFE')
+driver.find_element_by_id('NRACESSONFE').send_keys(key)
+driver.find_element_by_class_name('ng-binding').click()

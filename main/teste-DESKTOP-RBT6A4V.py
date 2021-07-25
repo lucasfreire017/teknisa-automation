@@ -57,4 +57,6 @@ driver.get('https://www.google.com/search?q=gato&oq=gato&aqs=chrome..69i57.1487j
 driver.execute_script("window.open('https://retail.teknisa.com/df/#/df_entrada#dfe11000_lancamento_entrada', '_blank')")
 
 # Change tab
-driver.switch_to.alert.accept()
+tab1 = driver.window_handles[1]
+sleep(5)
+driver.switch_to.window(tab1)
