@@ -94,9 +94,9 @@ if wait('zh-container-text-alert', 'alerta'):
         '/html/body/span/section/section/div[2]/aside[1]/aside/section/footer/button[1]').click()
 
 wait('bars', 'menu')
-sleep(3)
+sleep(5)
 driver.find_element_by_xpath('//*[@id="header"]/div/div[2]/div[1]/a/div').click()  # click to open container
-sleep(3)
+sleep(5)
 driver.find_element_by_xpath(
     '/html/body/span/section/section/div[2]/section[1]/div/aside/div[1]/section/input').send_keys(
     'Importação/Consulta de Notas Fiscais (Arquivo XML)')  # first option searched
@@ -112,16 +112,18 @@ while True:
         break
 
 wait('current', 'Opção Unidade')
+sleep(5)
 driver.find_element_by_class_name('current').click()
 wait('option', 'Inscrição Estadual Destino')
+sleep(5)
 driver.find_element_by_class_name('option').click()
-sleep(1)
+sleep(3)
 driver.find_element_by_xpath(
     '//*[@id="popup"]/span/section/section/section/div/form/section[1]/div/div[3]/div[1]/div/div[2]/span').click()
-sleep(2)
+sleep(3)
 driver.find_element_by_xpath(
     '//*[@id="popup"]/span/section/section/section/div/form/section[1]/div/div[3]/div[1]/div/div[2]/ul/li[1]').click()
-sleep(1)
+sleep(2)
 # write the start and final dates of the 'DANFES' that will be filtered
 driver.find_element_by_xpath('//*[@id="DTEMISSAO_START"]').send_keys(Keys.HOME, showdate())
 sleep(2)
@@ -129,7 +131,7 @@ driver.find_element_by_xpath('//*[@id="footer"]/div[3]/ul/li/a/span').click()  #
 
 wait('control-handle', 'botão de ações')
 driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL, 'f')
-sleep(1)
+sleep(2)
 driver.find_element_by_xpath(
     '/html/body/span/section/section/div[2]/section[2]/div/section/section/div/section/div/div[2]/div/div[1]/ul/li['
     '3]/div/div/div/div[3]/input').send_keys(
@@ -157,3 +159,11 @@ x = driver.find_element_by_id('span-field-NRACESSONFE').text
 print(type('key'))
 key = x.strip('Chave de Acesso').split()[0]
 print(f'A chave de Acesso é: {key}')
+
+# Lançamento de entrada
+
+# Open a new tab
+driver.execute_script("window.open('https://retail.teknisa.com/df/#/df_entrada#dfe11000_lancamento_entrada', '_blank')")
+
+# Change tab
+driver.switch_to.window(1)

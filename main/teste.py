@@ -52,6 +52,9 @@ def moveNum(num):
 
 driver = webdriver.Chrome(executable_path=r"../webdriver/chromedriver.exe")  # version 91
 driver.get('https://www.google.com/search?q=gato&oq=gato&aqs=chrome..69i57.1487j0j7&sourceid=chrome&ie=UTF-8')
-sleep(3)
-while True:
-    driver.refresh()
+
+# Open a new tab
+driver.execute_script("window.open('https://retail.teknisa.com/df/#/df_entrada#dfe11000_lancamento_entrada', '_blank')")
+
+# Change tab
+driver.switch_to.alert.accept()
