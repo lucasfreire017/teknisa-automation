@@ -106,7 +106,7 @@ if waitClass('zh-container-text-alert', 'Alerta de Usúario'):
 
 waitId('masonry-item-156151612121154545551411546', 'Containers')
 waitClass('menu-items', 'Menu')
-
+sleep(5)
 driver.find_element_by_xpath('//*[@id="header"]/div/div[2]/div[1]/a/div').click()  # click to open container
 sleep(5)
 driver.find_element_by_xpath(
@@ -140,70 +140,82 @@ driver.find_element_by_xpath('//*[@id="DTEMISSAO_START"]').send_keys(Keys.HOME, 
 sleep(2)
 driver.find_element_by_xpath('//*[@id="footer"]/div[3]/ul/li/a/span').click()  # Click when the filter is completed
 
-waitClass('control-handle', 'Botão de Ações')
-driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL, 'f')
-sleep(2)
-driver.find_element_by_xpath(
-    '/html/body/span/section/section/div[2]/section[2]/div/section/section/div/section/div/div[2]/div/div[1]/ul/li['
-    '3]/div/div/div/div[3]/input').send_keys(
-    initialNotes())  # search an invoice
 
 while True:
-    try:
-        waitXpath('//*[@id="grid-4037041933179304567641"]/div[2]/div/div/div/ng-include/p',
-                  '\033[1;31m"Notas não encontradas"\033[m', time=10)
-    except:
-        break
-    else:
-        moveNum(initialNotes())
-        driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL, 'f')
-        sleep(1)
-        driver.find_element_by_xpath(
-            '/html/body/span/section/section/div[2]/section[2]/div/section/section/div/section/div/div[2]/div/div['
-            '1]/ul/li[ '
-            '3]/div/div/div/div[3]/input').send_keys(initialNotes())
-
-driver.find_element_by_xpath('//*[@id="grid-4037041933179304567641"]/div[2]/div/div[1]').click()
-
-waitClass('zh-field-group', 'Informações da Nota')
-x = driver.find_element_by_id('span-field-NRACESSONFE').text
-print(type('key'))
-key = x.strip('Chave de Acesso').split()[0]
-print(f'A chave de Acesso é: {key}')
-
-# <--- Lançamento de entrada --->
-
-# Open a new tab
-driver.execute_script("window.open('https://retail.teknisa.com/df/#/df_entrada#dfe11000_lancamento_entrada', '_blank')")
-xmlTab = driver.window_handles[0]
-launchTab = driver.window_handles[1]
-
-# Change tab
-driver.switch_to.window(launchTab)
-
-while True:
-    try:
-        waitClass('container', 'Filtros de Lançamentos', 15)
-    except:
-        driver.refresh()
-    else:
-        break
-sleep(5)
-driver.find_element_by_xpath('//*[@id="footer"]/div[3]/ul/li/a/span').click()
-sleep(5)
-driver.find_element_by_tag_name('body').send_keys(Keys.F2)  # Button to add a new DANFE
-sleep(8)
-driver.find_element_by_name('NRACESSONFE').send_keys(key)
-sleep(2)
-driver.find_element_by_xpath('//*[@id="footer"]/div[3]/ul').click() # Button to save the invoice
-sleep(8)
-
-if waitClass('zh-container-alert', 'Alerta Nota Utilizada'):
-    # If the invoice number has already been used
+    waitClass('control-handle', 'Botão de Ações')
+    driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL, 'f')
+    sleep(2)
     driver.find_element_by_xpath(
-        '/html/body/span/section/section/div[2]/aside[1]/aside/section/footer/button').click()
+        '/html/body/span/section/section/div[2]/section[2]/div/section/section/div/section/div/div[2]/div/div[1]/ul/li['
+        '3]/div/div/div/div[3]/input').send_keys(
+        initialNotes())  # search an invoice
 
-    moveNum(key)
-    # Change tab
-    driver.switch_to.window(xmlTab)
-    driver.find_element_by_xpath('//*[@id="footer"]/div[1]/ul/li/a/span[2]').click()
+    while True:
+        try:
+            waitXpath('//*[@id="grid-4037041933179304567641"]/div[2]/div/div/div/ng-include/p',
+                      '\033[1;31m"Notas não encontradas"\033[m', time=10)
+        except:
+            break
+        else:
+            moveNum(initialNotes())
+            driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL, 'f')
+            sleep(1)
+            driver.find_element_by_xpath(
+                '/html/body/span/section/section/div[2]/section[2]/div/section/section/div/section/div/div[2]/div/div['
+                '1]/ul/li[ '
+                '3]/div/div/div/div[3]/input').send_keys(initialNotes())
+
+    driver.find_element_by_xpath('//*[@id="grid-4037041933179304567641"]/div[2]/div/div[1]').click()
+
+    waitClass('zh-field-group', 'Informações da Nota')
+    x = driver.find_element_by_id('span-field-NRACESSONFE').text
+    print(type('key'))
+    key = x.strip('Chave de Acesso').split()[0]
+    print(f'A chave de Acesso é: {key}')
+
+
+    # <--- Lançamento de entrada --->
+
+    try:
+        xmlTab = driver.window_handles[0]
+        launchTab = driver.window_handles[1]
+
+        # Change tab
+        driver.switch_to.window(launchTab)
+
+    except:
+        # Open a new tab
+        driver.execute_script("window.open('https://retail.teknisa.com/df/#/df_entrada#dfe11000_lancamento_entrada', '_blank')")
+        xmlTab = driver.window_handles[0]
+        launchTab = driver.window_handles[1]
+        # Change tab
+        driver.switch_to.window(launchTab)
+
+    while True:
+        try:
+            waitClass('container', 'Filtros de Lançamentos', 15)
+        except:
+            driver.refresh()
+        else:
+            break
+    sleep(5)
+    driver.find_element_by_xpath('//*[@id="footer"]/div[3]/ul/li/a/span').click()
+    sleep(5)
+    driver.find_element_by_tag_name('body').send_keys(Keys.F2)  # Button to add a new DANFE
+    sleep(8)
+    driver.find_element_by_name('NRACESSONFE').send_keys(key)
+    sleep(2)
+    driver.find_element_by_xpath('//*[@id="footer"]/div[3]/ul').click()  # Button to save the invoice
+    sleep(8)
+
+    if waitClass('zh-container-alert', 'Alerta Nota Utilizada'):
+        # If the invoice number has already been used
+        driver.find_element_by_xpath(
+            '/html/body/span/section/section/div[2]/aside[1]/aside/section/footer/button').click()
+
+        moveNum(initialNotes())
+        # Change tab
+        driver.switch_to.window(xmlTab)
+        driver.find_element_by_xpath('//*[@id="footer"]/div[1]/ul/li/a/span[2]').click()
+    else:
+        pass
