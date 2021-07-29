@@ -164,7 +164,6 @@ while True:
                 '/html/body/span/section/section/div[2]/section[2]/div/section/section/div/section/div/div[2]/div/div['
                 '1]/ul/li[ '
                 '3]/div/div/div/div[3]/input').send_keys(initialNotes())
-
     driver.find_element_by_xpath('//*[@id="grid-4037041933179304567641"]/div[2]/div/div[1]').click()
 
     waitClass('zh-field-group', 'Informações da Nota')
@@ -218,4 +217,12 @@ while True:
         driver.switch_to.window(xmlTab)
         driver.find_element_by_xpath('//*[@id="footer"]/div[1]/ul/li/a/span[2]').click()
     else:
-        pass
+        waitXpath('/html/body/span/section/section/div[2]/section[3]/div/div[3]/section/header/div/div/ul/li[2]/label/a', 'Produtos')
+        driver.find_element_by_xpath('//*[@id="footer"]/div[3]/ul/li/a/span').click()
+        driver.find_element_by_xpath('/html/body/span/section/section/div[2]/section[3]/div/div['
+                                     '3]/section/header/div/div/ul/li[5]/label/a').click()
+        sleep(3)
+        driver.find_element_by_xpath('//*[@id="footer"]/div[3]/ul/li/a/span').click()
+        sleep(5)
+        driver.find_element_by_xpath(
+            '/html/body/span/section/section/div[2]/aside[1]/aside/section/footer/button[1]').click()
