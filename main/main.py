@@ -95,8 +95,8 @@ def moveNum(num):
 driver = webdriver.Chrome(executable_path=r"../webdriver/chromedriver.exe")  # version 91
 driver.get("https://retail.teknisa.com/login/#/login#authentication")
 waitXpath('/html/body/span/section/section/div[2]/section[2]/div/section/section/div/div/div/form', 'Form Login')
-driver.find_element_by_name("USER").send_keys("estoque.cj@pobrejuan.com.br" + Keys.TAB)
-driver.find_element_by_xpath('//*[@id="PASSWORD"]').send_keys("20200201" + Keys.TAB)
+driver.find_element_by_name("USER").send_keys("E-mail" + Keys.TAB)
+driver.find_element_by_xpath('//*[@id="PASSWORD"]').send_keys("Password" + Keys.TAB)
 sleep(5)
 driver.find_element_by_xpath('//*[@id="SUBMIT"]').click()
 sleep(15)
